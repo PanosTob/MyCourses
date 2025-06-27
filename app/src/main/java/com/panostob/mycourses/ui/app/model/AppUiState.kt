@@ -1,4 +1,4 @@
-package com.panostob.mycourses.ui.app
+package com.panostob.mycourses.ui.app.model
 
 import android.net.Uri
 import androidx.compose.runtime.MutableState
@@ -25,6 +25,7 @@ data class AppUiEvent(
     val onDismissConnectionView: () -> Unit,
     val onNetworkConnected: () -> Unit,
     val onNetworkDisconnected: () -> Unit,
+    val closeTheAppPrompt: () -> Unit
 )
 
 data class DialogUiItem(

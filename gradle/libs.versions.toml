@@ -13,7 +13,6 @@ material = "1.12.0"
 
 #Libraries
 #Kotlin
-kotlinCoroutines = "1.9.0"
 hilt = "2.55"
 composeHilt = "1.2.0"
 crashlyticsPlugin = "3.0.4"

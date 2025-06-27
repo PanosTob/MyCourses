@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MyCoursesApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,7 +18,7 @@
         tools:targetApi="36">
 
         <activity
-            android:name="com.panostob.mycourses.ui.app.AppActivity"
+            android:name="com.panostob.mycourses.ui.app.activity.AppActivity"
             android:exported="true"
             android:theme="@style/Theme.MyCourses"
             android:windowSoftInputMode="adjustResize">
