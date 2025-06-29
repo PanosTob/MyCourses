@@ -1,7 +1,7 @@
 [versions]
 agp = "8.10.1"
 ktx = "2.1.10"
-ksp = "2.1.10-1.0.29"
+ksp = "2.1.10-1.0.31"
 composeBomVersion = "2025.06.01"
 navigation = "2.9.0"
 coreKtx = "1.16.0"
@@ -14,6 +14,7 @@ material = "1.12.0"
 #Libraries
 #Kotlin
 hilt = "2.55"
+hiltCommon = "1.2.0"
 composeHilt = "1.2.0"
 crashlyticsPlugin = "3.0.4"
 timber = "5.0.1"
@@ -24,6 +25,7 @@ coil = "3.1.0"
 datastore = "1.1.7"
 firebase = "33.16.0"
 room = "2.7.2"
+workManager = "2.9.0"
 serializationJson = "1.8.0"
 lifecycle = "2.9.1"
 uiTooling = "1.8.3"
@@ -65,7 +67,10 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 
 # Hilt (https://github.com/google/dagger/releases)
 google-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
-google-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+google-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+androidx-hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltCommon" }
+androidx-hilt-common = { group = "androidx.hilt", name = "hilt-common", version.ref = "hiltCommon" }
+androidx-hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltCommon" }
 
 # Hilt Compose (https://developer.android.com/jetpack/androidx/releases/hilt)
 androidx-hilt-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "composeHilt" }
@@ -104,6 +109,9 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
 
+# Worker
+androidx-work-runtime = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workManager" }
+
 # Serialization Json (https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-serialization-protobuf)
 jetbrains-kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serializationJson" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
@@ -128,4 +136,3 @@ google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.
 
 # Serialization "Same version with kotlin"
 jetbrains-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "ktx" }
-

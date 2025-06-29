@@ -9,7 +9,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.panostob.mycourses.ui.app.model.AppUiState
-import com.panostob.mycourses.ui.main.navigation.mainScreen
+import com.panostob.mycourses.ui.courses.details.navigation.courseDetailsScreen
+import com.panostob.mycourses.ui.courses.navigation.coursesScreen
 import com.panostob.mycourses.ui.splash.SplashDestination
 import com.panostob.mycourses.ui.splash.splashScreen
 import com.panostob.mycourses.util.navigation.NavigationDestination
@@ -21,7 +22,9 @@ internal typealias NavigationToCallBack = (NavigationDestination) -> Unit
 internal fun AppNavHost(
     uiState: State<AppUiState>,
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    isLoading: (Boolean) -> Unit,
+    onCloseTheAppRequest: () -> Unit
 ) {
     NavHost(
         modifier = modifier,
@@ -36,9 +39,15 @@ internal fun AppNavHost(
             navigateTo = { destination -> navController.safeNavigate(destination, popUpToRoute = SplashDestination) },
         )
 
-        mainScreen(
+        coursesScreen(
             navigateTo = { destination -> navController.safeNavigate(destination) },
-            onBackClicked = { uiState.value.onEvent.closeTheAppPrompt() }
+            onBackRequest = onCloseTheAppRequest,
+            isLoading = isLoading
+        )
+
+        courseDetailsScreen(
+            onBackRequest = { navController.navigateUp() },
+            isLoading = isLoading
         )
     }
 }

@@ -31,7 +31,7 @@ internal fun NavController.safeNavigate(destination: NavigationDestination, popU
         }
         Timber.tag("safeNavigate").v(destination.toString())
     } catch (e: Exception) {
-        FirebaseCrashlytics.getInstance().recordException(e)
+//        FirebaseCrashlytics.getInstance().recordException(e)
         Timber.tag("safeNavigate").e(e)
     }
 }

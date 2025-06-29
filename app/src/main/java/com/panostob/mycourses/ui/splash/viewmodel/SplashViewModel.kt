@@ -2,7 +2,7 @@ package com.panostob.mycourses.ui.splash.viewmodel
 
 import com.panostob.mycourses.ui.splash.model.SplashUiState
 import com.panostob.mycourses.ui.base.BaseViewModel
-import com.panostob.mycourses.ui.main.navigation.MainDestination
+import com.panostob.mycourses.ui.courses.navigation.CoursesDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +19,7 @@ class SplashViewModel @Inject constructor() : BaseViewModel() {
     init {
         launch {
             delay(1000)
-            _uiState.update { it.copy(navigationDestination = MainDestination) }
+            _uiState.update { it.copy(navigationDestination = CoursesDestination) }
         }
     }
 }

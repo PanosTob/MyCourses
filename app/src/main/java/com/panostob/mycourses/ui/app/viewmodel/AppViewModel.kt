@@ -1,6 +1,5 @@
 package com.panostob.mycourses.ui.app.viewmodel
 
-import androidx.lifecycle.SavedStateHandle
 import com.panostob.mycourses.R
 import com.panostob.mycourses.ui.app.model.AppUiEvent
 import com.panostob.mycourses.ui.app.model.AppUiState

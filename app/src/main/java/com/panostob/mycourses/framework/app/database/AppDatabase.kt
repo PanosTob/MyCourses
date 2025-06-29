@@ -2,7 +2,8 @@ package com.panostob.mycourses.framework.app.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.panostob.mycourses.data.main.model.MyCourseEntity
+import com.panostob.mycourses.data.courses.model.MyCourseEntity
+import com.panostob.mycourses.framework.courses.dao.CoursesDao
 
 @Database(
     entities = [
@@ -13,4 +14,5 @@ import com.panostob.mycourses.data.main.model.MyCourseEntity
 )
 
 abstract class AppDatabase : RoomDatabase() {
+    abstract fun coursesDao(): CoursesDao
 }
