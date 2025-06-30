@@ -4,12 +4,14 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -48,6 +50,7 @@ import com.panostob.mycourses.ui.courses.details.navigation.CourseDetailsDestina
 import com.panostob.mycourses.ui.courses.model.CourseUiItem
 import com.panostob.mycourses.ui.courses.model.CoursesUiState
 import com.panostob.mycourses.util.composable.rememberImageRequester
+import com.panostob.mycourses.util.composable.shimmerLoading
 import com.panostob.mycourses.util.ext.errorDrawable
 
 @Composable
@@ -57,7 +60,8 @@ fun CoursesScreen(
     navigateTo: NavigationToCallBack
 ) {
     Column(
-        modifier = modifier
+        modifier = Modifier
+            .fillMaxSize()
             .padding(top = Spacing_16dp, start = Spacing_16dp, end = Spacing_16dp),
         verticalArrangement = Arrangement.spacedBy(Spacing_24dp)
     ) {
@@ -69,16 +73,21 @@ fun CoursesScreen(
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.secondary)
         )
-        LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Spacing_16dp),
-            contentPadding = PaddingValues(bottom = Spacing_16dp)
+        LoadingSkeletonListContent(
+            loadingState = uiState.value.isLoading,
+            modifier = modifier.fillMaxSize()
         ) {
-            items(items = uiState.value.courses, key = { it.id }) { item ->
-                CoursesContentItem(
-                    item = item,
-                    onCourseItemClicked = { navigateTo(CourseDetailsDestination(item.id)) }
-                )
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(Spacing_16dp),
+                contentPadding = PaddingValues(bottom = Spacing_16dp)
+            ) {
+                items(items = uiState.value.courses, key = { it.id }) { item ->
+                    CoursesContentItem(
+                        item = item,
+                        onCourseItemClicked = { navigateTo(CourseDetailsDestination(item.id)) }
+                    )
+                }
             }
         }
     }
@@ -144,14 +153,14 @@ fun CoursesContentItem(
                 ) {
                     CourseCompletionProgressBar(
                         modifier = Modifier
-                            .weight(0.9f),
-                        progress = item.progressPercentage,
+                            .weight(0.88f),
+                        progress = item.animatedProgressValue(),
                         progressColor = item.progressBarColor,
                         height = Spacing_4dp
                     )
                     Text(
-                        modifier = Modifier.weight(0.1f),
-                        text = "${(item.progressPercentage * 100).toInt()}%",
+                        modifier = Modifier.weight(0.12f),
+                        text = item.progressBarPercentageLabel,
                         textAlign = TextAlign.Center,
                         color = ColorPrimary,
                         style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold)
@@ -171,6 +180,7 @@ fun CourseCompletionProgressBar(
     progressColor: Color = MaterialTheme.colorScheme.primary,
     height: Dp = Spacing_12dp
 ) {
+
     Canvas(
         modifier = modifier
             .fillMaxWidth()
@@ -196,6 +206,87 @@ fun CourseCompletionProgressBar(
                 cornerRadius = CornerRadius(radius, radius),
                 topLeft = Offset(0f, (size.height - barHeight) / 2)
             )
+        }
+    }
+}
+
+@Composable
+fun LoadingSkeletonListContent(
+    loadingState: State<Boolean>,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    Box(modifier = modifier) {
+        if (loadingState.value) {
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(Spacing_16dp),
+                userScrollEnabled = false
+            ) {
+                items(6) {
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(2f),
+                        shape = RoundedCornerShape(Spacing_16dp),
+                        colors = CardColors(
+                            containerColor = Color.White,
+                            contentColor = ColorPrimary,
+                            disabledContainerColor = ColorDisabledButton,
+                            disabledContentColor = ColorDisabledButton
+                        ),
+                        border = BorderStroke(width = 2.dp, color = MaterialTheme.colorScheme.secondary),
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .aspectRatio(3f)
+                                    .shimmerLoading()
+                            )
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(Spacing_16dp),
+                                verticalArrangement = Arrangement.spacedBy(Spacing_8dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .shimmerLoading()
+                                )
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .shimmerLoading()
+                                )
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth(),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                ) {
+                                    Box(
+                                        modifier = Modifier
+                                            .weight(0.9f)
+                                            .height(Spacing_4dp)
+                                            .shimmerLoading(),
+                                    )
+                                    Box(
+                                        modifier = Modifier
+                                            .weight(0.1f)
+                                            .shimmerLoading()
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            content()
         }
     }
 }

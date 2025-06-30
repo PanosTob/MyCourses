@@ -1,5 +1,6 @@
 package com.panostob.mycourses.framework.courses.mapper
 
+import com.panostob.mycourses.BuildConfig
 import com.panostob.mycourses.data.Mapper
 import com.panostob.mycourses.data.courses.model.MyCourseEntity
 import com.panostob.mycourses.data.courses.model.RemoteCourse
@@ -18,29 +19,25 @@ class CourseEntityMapper @Inject constructor() : Mapper {
         }
     }
 
-    operator fun invoke(courseEntity: MyCourseEntity?): RemoteCourse {
+    operator fun invoke(courseEntity: MyCourseEntity?): RemoteCourse? {
+        courseEntity ?: return null
+
         return RemoteCourse(
-            id = courseEntity?.id,
-            imageUrl = courseEntity?.imageUrl,
-            title = courseEntity?.title,
-            shortDescription = courseEntity?.shortDescription,
-            progressPercentage = courseEntity?.progressPercentage
+            id = courseEntity.id,
+            imageUrl = courseEntity.imageUrl,
+            title = courseEntity.title,
+            shortDescription = courseEntity.shortDescription,
+            progressPercentage = courseEntity.progressPercentage
         )
     }
 
     operator fun invoke(course: Course): MyCourseEntity {
-        /*return MyCourseEntity(
-            imageUrl = course?.imageUrl,
-            title = course?.title,
-            shortDescription = course?.shortDescription,
-            progressPercentage = course?.progressPercentage
-        )*/
         return MyCourseEntity(
-            id = 0,
-            imageUrl = "",
-            title = "",
-            shortDescription = "",
-            progressPercentage = 0f
+            id = course.id,
+            imageUrl = course.imageUrl.removePrefix(BuildConfig.API_MY_COURSES_IMAGES_URL.removeSuffix("/")),
+            title = course.title,
+            shortDescription = course.shortDescription,
+            progressPercentage = course.progressPercentage?.div(100) ?: 0f
         )
     }
 }

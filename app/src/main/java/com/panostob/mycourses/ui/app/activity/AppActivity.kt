@@ -10,13 +10,13 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.panostob.mycourses.di.module.dataStore
 import com.panostob.mycourses.domain.settings.language.entity.LanguageResult
 import com.panostob.mycourses.framework.settings.datasource.SettingsDataSourceImpl.Companion.LANGUAGE_KEY
 import com.panostob.mycourses.ui.app.composable.AppScreen
-import com.panostob.mycourses.ui.app.navigation.AppNavHost
 import com.panostob.mycourses.ui.app.viewmodel.AppViewModel
 import com.panostob.mycourses.ui.base.theme.MyCoursesTheme
 import com.panostob.mycourses.util.ext.updateLocale
@@ -28,8 +28,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.Locale
 
+@ExperimentalMaterial3Api
 @AndroidEntryPoint
-class AppActivity: ComponentActivity() {
+class AppActivity : ComponentActivity() {
 
     private val viewModel: AppViewModel by viewModels()
     private var job: Job? = null

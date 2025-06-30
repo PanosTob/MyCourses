@@ -20,7 +20,7 @@ class CoursesMapper @Inject constructor() : Mapper {
         course ?: return null
 
         return Course(
-            id = course.id?.toInt() ?: 0,
+            id = course.id,
             imageUrl = mapRemoteImageUrl(course.imageUrl),
             title = course.title ?: "",
             shortDescription = course.shortDescription ?: "",

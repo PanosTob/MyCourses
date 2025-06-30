@@ -1,29 +1,39 @@
 package com.panostob.mycourses.ui.app.composable
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.panostob.mycourses.R
 import com.panostob.mycourses.ui.app.alertdialog.DialogScreen
 import com.panostob.mycourses.ui.app.model.AppUiState
 import com.panostob.mycourses.ui.app.navigation.AppNavHost
-import com.panostob.mycourses.util.composable.shimmerLoading
+import com.panostob.mycourses.ui.base.theme.Spacing_12dp
 import com.panostob.mycourses.util.network.connection.rememberConnectivityMonitor
 
+@ExperimentalMaterial3Api
 @Composable
 internal fun AppScreen(
     uiState: State<AppUiState>
 ) {
-    AppSideEffects(
-        uiState = uiState
-    )
+    AppSideEffects(uiState = uiState)
 
     Box(
         modifier = Modifier
@@ -34,15 +44,11 @@ internal fun AppScreen(
 
         AppNavHost(
             modifier = Modifier.systemBarsPadding(),
-            uiState = uiState,
-            isLoading = { uiState.value.loadingUiState.value = it },
-            onCloseTheAppRequest = { uiState.value.onEvent.closeTheAppPrompt() }
+            onCloseTheAppRequest = { uiState.value.onEvent.closeTheAppPrompt() },
+            showSaveErrorDialog = { uiState.value.dialogUiItem.value = it },
         )
 
-        AppLoadingSkeleton(
-            loadingState = uiState.value.loadingUiState,
-            modifier = Modifier.fillMaxSize()
-        )
+        NoInternetConnectionMessageBar(uiState.value.noInternetConnectionScreenVisible)
     }
 }
 
@@ -66,11 +72,25 @@ fun AppSideEffects(
 }
 
 @Composable
-fun AppLoadingSkeleton(
-    loadingState: State<Boolean>,
-    modifier: Modifier = Modifier
+fun BoxScope.NoInternetConnectionMessageBar(
+    visibilityState: State<Boolean>
 ) {
-    if (loadingState.value) {
-        Box(modifier = modifier.shimmerLoading())
+    AnimatedVisibility(
+        modifier = Modifier
+            .fillMaxWidth()
+            .align(Alignment.BottomCenter),
+        visible = visibilityState.value,
+        enter = slideInVertically(initialOffsetY = { it }),
+        exit = slideOutVertically(targetOffsetY = { it })
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.Red)
+                .padding(Spacing_12dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(text = stringResource(R.string.no_internet_connection_screen_text), color = Color.White, style = MaterialTheme.typography.bodyMedium)
+        }
     }
 }

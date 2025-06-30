@@ -16,7 +16,6 @@ material = "1.12.0"
 hilt = "2.55"
 hiltCommon = "1.2.0"
 composeHilt = "1.2.0"
-crashlyticsPlugin = "3.0.4"
 timber = "5.0.1"
 moshi = "1.15.2"
 okhttp3 = "4.12.0"
@@ -101,7 +100,6 @@ androidx-datastore-preferences = { group = "androidx.datastore", name = "datasto
 # Firebase (https://firebase.google.com/support/release-notes/android)
 google-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase" }
 google-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
-google-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 
 # Room (https://developer.android.com/jetpack/androidx/releases/room)
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -131,8 +129,6 @@ google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 # Hilt "Same version with hilt"
 google-dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
-# Crashlytics (https://mvnrepository.com/artifact/com.google.firebase.crashlytics/com.google.firebase.crashlytics.gradle.plugin)
-google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlyticsPlugin" }
 
 # Serialization "Same version with kotlin"
 jetbrains-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "ktx" }

@@ -9,5 +9,5 @@ interface CoursesDataSource {
 
     suspend fun getCourseById(courseId: Long): RemoteCourse?
 
-    suspend fun updateCourse(course: Course): Long
+    suspend fun updateCourse(course: Course)
 }

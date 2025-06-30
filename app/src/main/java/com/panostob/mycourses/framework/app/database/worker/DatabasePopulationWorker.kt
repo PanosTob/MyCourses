@@ -7,12 +7,10 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.panostob.mycourses.data.courses.model.MyCourseEntity
 import com.panostob.mycourses.framework.courses.dao.CoursesDao
-import com.panostob.mycourses.usecase.courses.GetAllCourses
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.first
 import timber.log.Timber
-import javax.inject.Inject
 
 @HiltWorker
 class CoursesDatabasePopulationWorker @AssistedInject constructor(

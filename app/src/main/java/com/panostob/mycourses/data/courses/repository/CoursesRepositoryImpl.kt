@@ -2,8 +2,8 @@ package com.panostob.mycourses.data.courses.repository
 
 import com.panostob.mycourses.data.courses.datasource.CoursesDataSource
 import com.panostob.mycourses.data.courses.mapper.CoursesMapper
-import com.panostob.mycourses.data.courses.model.RemoteCourse
 import com.panostob.mycourses.domain.courses.entity.Course
+import com.panostob.mycourses.domain.courses.entity.UpdateCourseResult
 import com.panostob.mycourses.domain.courses.repository.CoursesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -21,7 +21,7 @@ class CoursesRepositoryImpl @Inject constructor(
         return coursesMapper(dataSource.getCourseById(courseId))
     }
 
-    override suspend fun updateCourse(course: Course): Long {
+    override suspend fun updateCourse(course: Course) {
         return dataSource.updateCourse(course)
     }
 }

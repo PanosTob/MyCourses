@@ -12,7 +12,6 @@ import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import timber.log.Timber
 import kotlin.reflect.KType
 import kotlin.toString
@@ -31,7 +30,6 @@ internal fun NavController.safeNavigate(destination: NavigationDestination, popU
         }
         Timber.tag("safeNavigate").v(destination.toString())
     } catch (e: Exception) {
-//        FirebaseCrashlytics.getInstance().recordException(e)
         Timber.tag("safeNavigate").e(e)
     }
 }

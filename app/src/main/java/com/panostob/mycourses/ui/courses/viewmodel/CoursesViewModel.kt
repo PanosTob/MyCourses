@@ -1,7 +1,6 @@
 package com.panostob.mycourses.ui.courses.viewmodel
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import com.panostob.mycourses.domain.courses.entity.Course
 import com.panostob.mycourses.ui.base.BaseViewModel
 import com.panostob.mycourses.ui.courses.mapper.CoursesUiMapper
@@ -40,6 +39,7 @@ class CoursesViewModel @Inject constructor(
     }
 
     private fun updateCoursesUI(courses: List<Course>) {
+        _uiState.value.courses.clear()
         _uiState.value.courses.addAll(coursesUiMapper(courses))
     }
 }

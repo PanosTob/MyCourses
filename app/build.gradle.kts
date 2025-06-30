@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.google.ksp)
     alias(libs.plugins.google.dagger.hilt)
-    alias(libs.plugins.google.firebase.crashlytics)
     alias(libs.plugins.jetbrains.serialization)
 }
 
@@ -158,7 +157,6 @@ dependencies {
     // Firebase
     implementation(platform(libs.google.firebase.bom))
     implementation(libs.google.firebase.analytics)
-    implementation(libs.google.firebase.crashlytics)
 
     // Room
     implementation(libs.androidx.room.runtime)

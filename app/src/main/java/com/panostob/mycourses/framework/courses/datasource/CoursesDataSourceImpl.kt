@@ -21,7 +21,7 @@ class CoursesDataSourceImpl @Inject constructor(
         return courseEntityMapper(coursesDao.getCourseById(courseId))
     }
 
-    override suspend fun updateCourse(course: Course): Long {
+    override suspend fun updateCourse(course: Course) {
         return coursesDao.upsertCourse(courseEntityMapper(course))
     }
 }

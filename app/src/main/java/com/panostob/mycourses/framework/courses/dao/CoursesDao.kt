@@ -3,6 +3,7 @@ package com.panostob.mycourses.framework.courses.dao
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import androidx.room.Upsert
 import com.panostob.mycourses.data.courses.model.MyCourseEntity
 import kotlinx.coroutines.flow.Flow
@@ -18,5 +19,5 @@ interface CoursesDao {
     suspend fun getCourseById(courseId: Long): MyCourseEntity?
 
     @Upsert(entity = MyCourseEntity::class)
-    suspend fun upsertCourse(coupon: MyCourseEntity): Long
+    suspend fun upsertCourse(coupon: MyCourseEntity)
 }

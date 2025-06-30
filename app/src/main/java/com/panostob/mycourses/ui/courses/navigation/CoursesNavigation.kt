@@ -11,8 +11,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -31,7 +29,6 @@ data object CoursesDestination : NavigationDestination()
 fun NavGraphBuilder.coursesScreen(
     navigateTo: NavigationToCallBack,
     onBackRequest: () -> Unit,
-    isLoading: (Boolean) -> Unit
 ) {
     composable<CoursesDestination>(
         enterTransition = { fadeIn() },
@@ -46,29 +43,11 @@ fun NavGraphBuilder.coursesScreen(
             onBackRequest()
         }
 
-        CoursesSideEffects(uiState, isLoading)
-
         CoursesScreen(
             modifier = Modifier
                 .fillMaxSize(),
             uiState = uiState,
             navigateTo = navigateTo,
         )
-    }
-}
-
-@Composable
-private fun CoursesSideEffects(
-    uiState: State<CoursesUiState>,
-    isLoading: (Boolean) -> Unit,
-) {
-
-    val lifecycle = LocalLifecycleOwner.current.lifecycle
-    LaunchedEffect(Unit) {
-        snapshotFlow { uiState.value.isLoading.value }
-            .flowWithLifecycle(lifecycle)
-            .collect {
-                isLoading(it)
-            }
     }
 }
