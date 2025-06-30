@@ -7,6 +7,22 @@
     <string name="generic_error_subtitle">Try again later!</string>
 
     <!-- No Internet Connection -->
-    <string name="no_internet_connection_screen_text">Failed to connect to the Internet. Please check your internet connection.</string>
-    <string name="no_internet_connection_screen_refresh">Refresh</string>
+    <string name="no_internet_connection_screen_text">No internet connection</string>
+
+    <!-- Close the app Dialog -->
+    <string name="close_the_app_dialog_title">Wait!</string>
+    <string name="close_the_app_dialog_subtitle">Do you really want to close the app?</string>
+    <string name="close_the_app_dialog_confirm_button_text">Yes</string>
+    <string name="close_the_app_dialog_dismiss_button_text">No</string>
+
+    <!-- Courses Screen -->
+    <string name="courses_screen_title">Courses</string>
+
+    <!-- Course Details Screen -->
+    <string name="course_details_screen_title">Course Details</string>
+    <string name="course_details_screen_completion_progress_slider_value_text">Progress: %s %%</string>
+    <string name="course_details_screen_save_button_text">Save</string>
+    <string name="course_details_screen_save_dialog_title">Oops!</string>
+    <string name="course_details_screen_save_dialog_description">Course progress saving failed!</string>
+
 </resources>

@@ -1,10 +1,11 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.google.ksp)
     alias(libs.plugins.google.dagger.hilt)
-    alias(libs.plugins.google.firebase.crashlytics)
     alias(libs.plugins.jetbrains.serialization)
 }
 
@@ -40,10 +41,6 @@ android {
     }
 
     signingConfigs {
-        getByName("debug") {
-            storeFile = file("/home/ADDC/ptoumpas/.config/.android/debug.keystore")
-            keyAlias = "AndroidDebugKey"
-        }
         create("release") {
             storeFile = file("keystore/mycourses.jks")
             keyAlias = "myCoursesKey"
@@ -59,14 +56,14 @@ android {
             applicationIdSuffix = ".dev"
             signingConfig = signingConfigs.getByName("debug")
             resValue("string", "app_name", "My Courses DEV")
-            buildConfigField("String", "API_MY_COURSES_IMAGES_URL", "\"https://picsum.photos/\"")
+            buildConfigField("String", "API_MY_COURSES_IMAGES_URL", "\"https://assets.schoox.com/\"")
         }
 
         create("prod") {
             dimension = "env"
             signingConfig = signingConfigs.getByName("release")
             resValue("string", "app_name", "My Courses")
-            buildConfigField("String", "API_MY_COURSES_IMAGES_URL", "\"\"")
+            buildConfigField("String", "API_MY_COURSES_IMAGES_URL", "\"https://assets.schoox.com/\"")
         }
     }
 
@@ -96,6 +93,10 @@ android {
 }
 
 dependencies {
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
 
     // Activity Compose
     implementation(libs.androidx.activityCompose)
@@ -130,6 +131,8 @@ dependencies {
 
     // Moshi
     implementation(libs.squareup.moshi)
+    implementation(libs.androidx.hilt.common)
+    implementation(libs.androidx.hilt.work)
     ksp(libs.squareup.moshi.codegen)
 
     // okHttp
@@ -154,7 +157,6 @@ dependencies {
     // Firebase
     implementation(platform(libs.google.firebase.bom))
     implementation(libs.google.firebase.analytics)
-    implementation(libs.google.firebase.crashlytics)
 
     // Room
     implementation(libs.androidx.room.runtime)
@@ -163,9 +165,13 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.paging)
 
+    //WorkManager
+    implementation(libs.androidx.work.runtime)
+
     // Hilt
     implementation(libs.google.hilt)
     ksp(libs.google.hilt.compiler)
+    ksp(libs.androidx.hilt.compiler)
 
     // Hilt Compose
     implementation(libs.androidx.hilt.compose)

@@ -1,20 +1,13 @@
-package com.panostob.mycourses.ui.app
+package com.panostob.mycourses.ui.app.model
 
-import android.net.Uri
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import com.panostob.mycourses.R
 import com.panostob.mycourses.domain.settings.language.entity.LanguageResult
 import com.panostob.mycourses.util.compose.MyStringBuilder
-import com.google.android.gms.common.api.ResolvableApiException
-import com.panostob.mycourses.R
 
 data class AppUiState(
-    val loadingUiState: MutableState<Boolean> = mutableStateOf(false),
-    val showAlertDialog: MutableState<DialogUiItem?> = mutableStateOf(null),
-    val restartApplication: MutableState<Unit?> = mutableStateOf(null),
     val language: LanguageResult? = null,
-    val deeplink: Uri? = null,
-    val locationException: MutableState<ResolvableApiException?> = mutableStateOf(null),
     val noInternetConnectionScreenVisible: MutableState<Boolean> = mutableStateOf(false),
     val dialogUiItem: MutableState<DialogUiItem?> = mutableStateOf(null),
     val closeTheApp: Boolean = false,
@@ -25,6 +18,7 @@ data class AppUiEvent(
     val onDismissConnectionView: () -> Unit,
     val onNetworkConnected: () -> Unit,
     val onNetworkDisconnected: () -> Unit,
+    val closeTheAppPrompt: () -> Unit
 )
 
 data class DialogUiItem(
