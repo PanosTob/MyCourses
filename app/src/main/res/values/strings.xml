@@ -9,6 +9,12 @@
     <!-- No Internet Connection -->
     <string name="no_internet_connection_screen_text">No internet connection</string>
 
+    <!-- Language Bottom Sheet -->
+    <string name="language_title">Choose Language</string>
+    <string name="language_confirm_btn">CONFIRM</string>
+    <string name="language_english_title">English</string>
+    <string name="language_greek_title" translatable="false">Ελληνικά</string>
+
     <!-- Close the app Dialog -->
     <string name="close_the_app_dialog_title">Wait!</string>
     <string name="close_the_app_dialog_subtitle">Do you really want to close the app?</string>
@@ -24,5 +30,4 @@
     <string name="course_details_screen_save_button_text">Save</string>
     <string name="course_details_screen_save_dialog_title">Oops!</string>
     <string name="course_details_screen_save_dialog_description">Course progress saving failed!</string>
-
 </resources>

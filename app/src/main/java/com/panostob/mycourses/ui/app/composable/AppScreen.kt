@@ -21,11 +21,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.panostob.mycourses.R
 import com.panostob.mycourses.ui.app.alertdialog.DialogScreen
+import com.panostob.mycourses.ui.app.language.composable.SelectionBottomSheet
 import com.panostob.mycourses.ui.app.model.AppUiState
 import com.panostob.mycourses.ui.app.navigation.AppNavHost
 import com.panostob.mycourses.ui.base.theme.Spacing_12dp
+import com.panostob.mycourses.util.compose.MyStringBuilder
 import com.panostob.mycourses.util.network.connection.rememberConnectivityMonitor
 
 @ExperimentalMaterial3Api
@@ -42,10 +45,16 @@ internal fun AppScreen(
     ) {
         DialogScreen(dialogUiItem = { uiState.value.dialogUiItem.value })
 
+        SelectionBottomSheet(
+            uiState = uiState.value.languageUiState.collectAsStateWithLifecycle(),
+            title = MyStringBuilder.StringResource(R.string.language_title),
+        )
+
         AppNavHost(
             modifier = Modifier.systemBarsPadding(),
             onCloseTheAppRequest = { uiState.value.onEvent.closeTheAppPrompt() },
             showSaveErrorDialog = { uiState.value.dialogUiItem.value = it },
+            onLanguageMenuOpenRequest = { uiState.value.onEvent.onLanguageMenuOpenRequest() }
         )
 
         NoInternetConnectionMessageBar(uiState.value.noInternetConnectionScreenVisible)

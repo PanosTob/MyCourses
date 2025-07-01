@@ -29,6 +29,7 @@ data object CoursesDestination : NavigationDestination()
 fun NavGraphBuilder.coursesScreen(
     navigateTo: NavigationToCallBack,
     onBackRequest: () -> Unit,
+    onLanguageMenuOpenRequest: () -> Unit,
 ) {
     composable<CoursesDestination>(
         enterTransition = { fadeIn() },
@@ -48,6 +49,7 @@ fun NavGraphBuilder.coursesScreen(
                 .fillMaxSize(),
             uiState = uiState,
             navigateTo = navigateTo,
+            onLanguageMenuOpenRequest = onLanguageMenuOpenRequest
         )
     }
 }
