@@ -6,17 +6,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.graphics.Color
-import com.panostob.mycourses.ui.base.theme.ColorProgressComplete
+import com.panostob.mycourses.ui.base.theme.ColorGreen
 import kotlinx.serialization.Serializable
 
 data class CoursesUiState(
@@ -33,7 +31,7 @@ data class CourseUiItem(
     val progressPercentage: Float
 ) {
     val animatedProgressValue: @Composable () -> Float = {
-        var targetProgress by rememberSaveable (progressPercentage) { mutableFloatStateOf(0f) }
+        var targetProgress by rememberSaveable(progressPercentage) { mutableFloatStateOf(0f) }
 
         // Animate the progress value
         val animatedProgress by animateFloatAsState(
@@ -59,6 +57,6 @@ data class CourseUiItem(
         get() = if (progressPercentage < 1f) {
             MaterialTheme.colorScheme.secondary
         } else {
-            ColorProgressComplete
+            MaterialTheme.colorScheme.tertiary
         }
 }

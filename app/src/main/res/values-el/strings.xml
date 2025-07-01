@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="empty" translatable="false" />
+    <string name="ok" translatable="false">OK</string>
+
+    <!-- General Dialog -->
+    <string name="generic_error_title">Ουπς! Κάτι δεν πήγε καλα!</string>
+    <string name="generic_error_subtitle">Προσπάθησε ξανά αργότερα!</string>
+
+    <!-- No Internet Connection -->
+    <string name="no_internet_connection_screen_text">Αδυναμία σύνδεσης στο Διαδίκτυο. Παρακαλώ έλεγξε την σύνδεσή σου.</string>
+
+    <!-- Language Bottom Sheet -->
+    <string name="language_title">Επιλογή Γλώσσας</string>
+    <string name="language_confirm_btn">ΕΠΙΒΕΒΑΙΩΣΗ</string>
+    <string name="language_english_title">English</string>
+
+    <!-- Close the app Dialog -->
+    <string name="close_the_app_dialog_title">Περίμενε!</string>
+    <string name="close_the_app_dialog_subtitle">Θέλεις να κλείσεις αυτήν την εφαρμογή;</string>
+    <string name="close_the_app_dialog_confirm_button_text">Ναι</string>
+    <string name="close_the_app_dialog_dismiss_button_text">Όχι</string>
+
+    <!-- Courses Screen -->
+    <string name="courses_screen_title">Μαθήματα</string>
+
+    <!-- Course Details Screen -->
+    <string name="course_details_screen_title">Λεπτομέριες Μαθήματος</string>
+    <string name="course_details_screen_completion_progress_slider_value_text">Ποσοστό ολοκλήρωσης: %s %%</string>
+    <string name="course_details_screen_save_button_text">Αποθήκευση</string>
+    <string name="course_details_screen_save_dialog_title">Ωπα!</string>
+    <string name="course_details_screen_save_dialog_description">Η ενημέρωση της εξέλιξης του μαθήματος απέτυχε!</string>
+</resources>

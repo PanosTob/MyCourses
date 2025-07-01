@@ -4,12 +4,10 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.panostob.mycourses.ui.app.model.AppUiState
 import com.panostob.mycourses.ui.app.model.DialogUiItem
 import com.panostob.mycourses.ui.courses.details.navigation.courseDetailsScreen
 import com.panostob.mycourses.ui.courses.navigation.coursesScreen
@@ -26,6 +24,7 @@ internal fun AppNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     showSaveErrorDialog: (DialogUiItem) -> Unit,
+    onLanguageMenuOpenRequest: () -> Unit,
     onCloseTheAppRequest: () -> Unit
 ) {
     NavHost(
@@ -44,6 +43,7 @@ internal fun AppNavHost(
         coursesScreen(
             navigateTo = { destination -> navController.safeNavigate(destination) },
             onBackRequest = onCloseTheAppRequest,
+            onLanguageMenuOpenRequest = onLanguageMenuOpenRequest,
         )
 
         courseDetailsScreen(

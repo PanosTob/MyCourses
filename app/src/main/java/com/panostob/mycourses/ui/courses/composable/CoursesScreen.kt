@@ -9,27 +9,33 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -49,6 +55,7 @@ import com.panostob.mycourses.ui.base.theme.Spacing_8dp
 import com.panostob.mycourses.ui.courses.details.navigation.CourseDetailsDestination
 import com.panostob.mycourses.ui.courses.model.CourseUiItem
 import com.panostob.mycourses.ui.courses.model.CoursesUiState
+import com.panostob.mycourses.util.composable.noRippleClickable
 import com.panostob.mycourses.util.composable.rememberImageRequester
 import com.panostob.mycourses.util.composable.shimmerLoading
 import com.panostob.mycourses.util.ext.errorDrawable
@@ -57,7 +64,8 @@ import com.panostob.mycourses.util.ext.errorDrawable
 fun CoursesScreen(
     uiState: State<CoursesUiState>,
     modifier: Modifier = Modifier,
-    navigateTo: NavigationToCallBack
+    navigateTo: NavigationToCallBack,
+    onLanguageMenuOpenRequest: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -65,14 +73,33 @@ fun CoursesScreen(
             .padding(top = Spacing_16dp, start = Spacing_16dp, end = Spacing_16dp),
         verticalArrangement = Arrangement.spacedBy(Spacing_24dp)
     ) {
-        Text(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = Spacing_24dp),
-            text = stringResource(R.string.courses_screen_title),
-            textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.secondary)
-        )
+                .aspectRatio(8f)
+                .heightIn(Spacing_24dp)
+        ) {
+            Text(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .align(Alignment.Center),
+                text = stringResource(R.string.courses_screen_title),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.secondary)
+            )
+            Icon(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .sizeIn(Spacing_24dp)
+                    .fillMaxWidth(0.08f)
+                    .aspectRatio(1f)
+                    .clip(CircleShape)
+                    .clickable { onLanguageMenuOpenRequest() },
+                painter = painterResource(R.drawable.ic_language),
+                contentDescription = "Button Change App Language",
+                tint = MaterialTheme.colorScheme.secondary
+            )
+        }
         LoadingSkeletonListContent(
             loadingState = uiState.value.isLoading,
             modifier = modifier.fillMaxSize()
@@ -143,7 +170,7 @@ fun CoursesContentItem(
                     text = item.shortDescription,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 2,
-                    style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.tertiary)
+                    style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.primary)
                 )
 
                 Row(
